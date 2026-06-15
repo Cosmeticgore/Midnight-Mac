@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://f13hfcutntux"]
+
+[ext_resource type="Script" uid="uid://cve1ipv3o1ywa" path="res://Scripts/Player.gd" id="1_l8h54"]
+[ext_resource type="PackedScene" uid="uid://q1ud24cmcb6h" path="res://World ASSET/interact_ray.tscn" id="2_4ntmi"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
+
+[node name="Player" type="CharacterBody3D" unique_id=77865172 groups=["PLAYER"]]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_l8h54")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1420972175 groups=["PLAYER"]]
+shape = SubResource("CapsuleShape3D_hvfyp")
+
+[node name="Head" type="Node3D" parent="." unique_id=476797539 groups=["PLAYER"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5074082, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1517754484 groups=["PLAYER"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15124255, -0.25000882)
+
+[node name="InteractRay" parent="Head/Camera3D" unique_id=830977125 groups=["PLAYER"] instance=ExtResource("2_4ntmi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15124255, -0.44318342)

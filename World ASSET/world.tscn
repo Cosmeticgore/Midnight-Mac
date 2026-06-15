@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://bt1yrm6hv3dnj"]
+
+[ext_resource type="PackedScene" uid="uid://f13hfcutntux" path="res://Player/player.tscn" id="1_f366e"]
+[ext_resource type="PackedScene" uid="uid://bc7b2tvxejjh3" path="res://Scripts/TESTforInteract.tscn" id="2_vt2cv"]
+[ext_resource type="PackedScene" uid="uid://bdw62qk70h5s1" path="res://Scripts/TESTforHEADBOBOFF.tscn" id="3_4cjle"]
+[ext_resource type="Texture2D" uid="uid://dhounx6pi2k0b" path="res://Models/Pitted Dry Ground/Pitted Dirt 1 128.png" id="4_f366e"]
+[ext_resource type="Texture2D" uid="uid://bo568yvuxaxxm" path="res://Models/Pitted Dry Ground/Pitted Dirt 1.png" id="5_vt2cv"]
+[ext_resource type="PackedScene" uid="uid://bck6ubau1cids" path="res://NPC ANIMATED/Mark_32.tscn" id="6_4cjle"]
+[ext_resource type="Script" uid="uid://cqy0nbtt7lupj" path="res://World ASSET/stalker_manager.gd" id="8_n0cbt"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vt2cv"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_4cjle"]
+sky_material = SubResource("ProceduralSkyMaterial_vt2cv")
+
+[sub_resource type="Environment" id="Environment_i7mid"]
+background_mode = 2
+sky = SubResource("Sky_4cjle")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0cbt"]
+albedo_color = Color(2.887845e-06, 0.6001314, 0.31398004, 1)
+albedo_texture = ExtResource("4_f366e")
+normal_scale = 8.02
+normal_texture = ExtResource("5_vt2cv")
+ao_enabled = true
+ao_light_affect = 0.17
+ao_texture = ExtResource("5_vt2cv")
+uv1_scale = Vector3(55, 55, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sn5f5"]
+material = SubResource("StandardMaterial3D_n0cbt")
+size = Vector2(300, 300)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4cjle"]
+
+[node name="World" type="Node3D" unique_id=1738154863]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1066500591]
+environment = SubResource("Environment_i7mid")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1001085923]
+transform = Transform3D(0.8718728, 0.0058975685, 0.48969695, -0.4706147, -0.2665677, 0.8411085, 0.13549788, -0.96379817, -0.22963764, 12.604182, 26.962223, 0)
+shadow_enabled = true
+
+[node name="INTERACTBOX" parent="." unique_id=1747599882 groups=["HEADBOBOFF"] instance=ExtResource("2_vt2cv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3589578, 2.8476586)
+
+[node name="HEADBOBBOX" parent="." unique_id=1265965392 instance=ExtResource("3_4cjle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.3521624, 2.2957222, -0.5562171)
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1384122889]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D" unique_id=1822038871]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/StaticBody3D" unique_id=1123106146]
+
+[node name="Ground" type="MeshInstance3D" parent="Node3D/StaticBody3D/MeshInstance3D" unique_id=1526653084]
+transform = Transform3D(0.9978568, 0, 0, 0, 0.9978568, 0, 0, 0, 0.9978568, 0.0011177063, -0.014284134, -0.009102821)
+mesh = SubResource("PlaneMesh_sn5f5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D" unique_id=1059990291]
+transform = Transform3D(300, 0, 0, 0, 1, 0, 0, 0, 300, 0, 0, 0)
+shape = SubResource("BoxShape3D_4cjle")
+debug_color = Color(0, 0.4, 1, 0.41960785)
+
+[node name="Player" parent="." unique_id=77865172 instance=ExtResource("1_f366e")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.464, 2.141336, -0.854)
+
+[node name="NPCS" type="Node3D" parent="." unique_id=1922880469]
+
+[node name="Mark" parent="NPCS" unique_id=413125924 instance=ExtResource("6_4cjle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.54, 0, -10.927)
+
+[node name="Enemies" type="Node3D" parent="." unique_id=1142167218]
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=763056665 groups=["stalker_spots"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.25055, -0.76541185, 30.627165)
+
+[node name="Marker3D3" type="Marker3D" parent="." unique_id=2035378847 groups=["stalker_spots"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -79.40979, -0.76541185, -7.7585983)
+
+[node name="Marker3D2" type="Marker3D" parent="." unique_id=524170368 groups=["stalker_spots"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.324951, -0.76541185, -41.861855)
+
+[node name="StalkerManager" type="Node3D" parent="." unique_id=808375984]
+script = ExtResource("8_n0cbt")
