@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dsdckbtpmdf4s"]
+
+[ext_resource type="Script" uid="uid://c75gn422km10u" path="res://Scripts/pickup_item.gd" id="1_nsp1p"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_a0tk4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a202f"]
+albedo_color = Color(0, 0.7220997, 0.63993096, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_noarx"]
+material = SubResource("StandardMaterial3D_a202f")
+
+[node name="Node3D" type="Node3D" unique_id=1328374524 groups=["INTERACTABLE"]]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=165452819 groups=["INTERACTABLE"]]
+script = ExtResource("1_nsp1p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1473880636 groups=["INTERACTABLE"]]
+shape = SubResource("SphereShape3D_a0tk4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=583257442 groups=["INTERACTABLE"]]
+mesh = SubResource("SphereMesh_noarx")

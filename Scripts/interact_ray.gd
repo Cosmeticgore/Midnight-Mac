@@ -8,6 +8,5 @@ func _physics_process(_delta):
 		#Basic interaction 
 		if hit_object and hit_object.is_in_group("INTERACTABLE"):
 			if Input.is_action_just_pressed("interact"):
-				hit_object.interact()
-				
-		
+				if hit_object.has_method("interact"):
+					hit_object.interact(owner)       

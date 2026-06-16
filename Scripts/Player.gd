@@ -1,27 +1,41 @@
 extends CharacterBody3D
 
+#Movement and Stamina
 var speed
-const WALK_SPEED = 4.0
-const SPRINT_SPEED = 6
+var WALK_SPEED = 4.0
+var SPRINT_SPEED = 6
+var max_stamina = 100.0
+var current_stamina = 100.0
+var stamina_drain_rate = 20.0
+var stamina_regen_rate = 20.0
+var exhausted = false
+#Mouse Sens
 const SENSITIVITY = 0.003
 
+#Items and Inventory
+var current_item = "nothing"
 
-#bob variables
-const BOB_FREQ = 2.4
-const BOB_MAX = 1
+
+#Head Bob
+var BOB_FREQ = 2.4
+var BOB_MAX = 1
 var BOB_AMP = 0.2
 var t_bob = 0.0
 var has_interacted_once:bool = false
 
-#fov variables
-const BASE_FOV = 75.0
-const FOV_CHANGE = 1.5
+#FOV 
+var BASE_FOV = 75.0
+var FOV_CHANGE = 1.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 9.8
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
+@onready var burger_model: MeshInstance3D = $Head/Camera3D/Hand/BurgerModel
+@onready var reciept_model: MeshInstance3D = $Head/Camera3D/Hand/RecieptModel
+
+
 
 
 func _ready():
@@ -40,13 +54,29 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	
-	# Handle Sprint.
-	if Input.is_action_pressed("sprint"):
+	# Handle Sprint and Stamina
+	if Input.is_action_pressed("sprint") and not exhausted:
 		speed = SPRINT_SPEED
+		current_stamina -= stamina_drain_rate * delta
+		
+		
 	else:
 		speed = WALK_SPEED
+		current_stamina += stamina_regen_rate * delta
 		
-	
+	#Exhaustion and Head Bob + FOV Effects
+	current_stamina = clamp(current_stamina, 0.0, max_stamina)
+	if current_stamina <= 0.0:
+		BOB_AMP = 0.5
+		BOB_FREQ = 2.5
+		BASE_FOV = 50.0
+		exhausted = true
+	if current_stamina >= max_stamina:
+		BOB_AMP = 0.2
+		BOB_FREQ = 2.4
+		BASE_FOV = 75.0
+		
+		exhausted = false
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("left", "right", "forward", "back")
@@ -88,3 +118,18 @@ func _headbob(time) -> Vector3:
 func lock_headbob():
 	has_interacted_once = true
 	BOB_AMP = 0.1
+	
+func hold_item(name_of_item):
+	current_item = name_of_item
+	print("Player is now holding: ", current_item)
+	
+	# Safety first: Hide both models so they don't overlap!
+	burger_model.visible = false
+	reciept_model.visible = false
+	
+	# Now, check the exact string name to see what to show
+	if current_item == "Borgir":
+		burger_model.visible = true
+	elif current_item == "Reciept":
+		reciept_model.visible = true
+	

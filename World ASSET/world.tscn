@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bo568yvuxaxxm" path="res://Models/Pitted Dry Ground/Pitted Dirt 1.png" id="5_vt2cv"]
 [ext_resource type="PackedScene" uid="uid://bck6ubau1cids" path="res://NPC ANIMATED/Mark_32.tscn" id="6_4cjle"]
 [ext_resource type="Script" uid="uid://cqy0nbtt7lupj" path="res://World ASSET/stalker_manager.gd" id="8_n0cbt"]
+[ext_resource type="PackedScene" uid="uid://bk85d8p5cuxl7" path="res://BurgerModel.tscn" id="8_sn5f5"]
+[ext_resource type="PackedScene" uid="uid://bj0s23elsiu35" path="res://RecieptModel.tscn" id="9_vl8d0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vt2cv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -78,13 +80,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.54, 0, -10.927)
 [node name="Enemies" type="Node3D" parent="." unique_id=1142167218]
 
 [node name="Marker3D" type="Marker3D" parent="." unique_id=763056665 groups=["stalker_spots"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.25055, -0.76541185, 30.627165)
-
-[node name="Marker3D3" type="Marker3D" parent="." unique_id=2035378847 groups=["stalker_spots"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -79.40979, -0.76541185, -7.7585983)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.25055, -0.76541185, 78.28194)
 
 [node name="Marker3D2" type="Marker3D" parent="." unique_id=524170368 groups=["stalker_spots"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.324951, -0.76541185, -41.861855)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.324951, -0.76541185, -83.1496)
 
 [node name="StalkerManager" type="Node3D" parent="." unique_id=808375984]
 script = ExtResource("8_n0cbt")
+
+[node name="Node3D2" parent="." unique_id=2048609377 instance=ExtResource("8_sn5f5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.776672, 1, -4.114813)
+
+[node name="Node3D3" parent="." unique_id=508225653 instance=ExtResource("9_vl8d0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.651306, 1.499999, -9.462103)

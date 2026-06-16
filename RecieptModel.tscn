@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bj0s23elsiu35"]
+
+[ext_resource type="Script" uid="uid://c75gn422km10u" path="res://Scripts/pickup_item.gd" id="1_wscve"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1io86"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6ed3u"]
+
+[node name="Node3D" type="Node3D" unique_id=508225653 groups=["INTERACTABLE"]]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=192700281 groups=["INTERACTABLE"]]
+script = ExtResource("1_wscve")
+item_name = "Reciept"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1113678561 groups=["INTERACTABLE"]]
+shape = SubResource("CylinderShape3D_1io86")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1527549289 groups=["INTERACTABLE"]]
+mesh = SubResource("CylinderMesh_6ed3u")

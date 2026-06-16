@@ -5,6 +5,10 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_4ntmi"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_btcbx"]
+
 [node name="Player" type="CharacterBody3D" unique_id=77865172 groups=["PLAYER"]]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("1_l8h54")
@@ -20,3 +24,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15124255, -0.25000882)
 
 [node name="InteractRay" parent="Head/Camera3D" unique_id=830977125 groups=["PLAYER"] instance=ExtResource("2_4ntmi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15124255, -0.44318342)
+
+[node name="Hand" type="Node3D" parent="Head/Camera3D" unique_id=1132373857]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41051537, -0.331066, -0.7701037)
+
+[node name="RecieptModel" type="MeshInstance3D" parent="Head/Camera3D/Hand" unique_id=1495170353]
+transform = Transform3D(0.47954786, 0, 0, 0, 0.3381818, 0, 0, 0, 0.484114, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_4ntmi")
+
+[node name="BurgerModel" type="MeshInstance3D" parent="Head/Camera3D/Hand" unique_id=1205580304]
+transform = Transform3D(0.6637782, 0, 0, 0, 0.46143895, 0, 0, 0, 0.540349, 0, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_btcbx")

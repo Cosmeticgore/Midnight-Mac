@@ -1,7 +1,7 @@
 extends StaticBody3D
 
 
-func interact():
+func interact(player):
 	print("You Touched The Thing")
 	
 	#Bascially put this script into stuff we wanna interact with

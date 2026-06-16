@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bk85d8p5cuxl7"]
+
+[ext_resource type="Script" uid="uid://c75gn422km10u" path="res://Scripts/pickup_item.gd" id="1_8bfvj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2ttpr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8bfvj"]
+
+[node name="Node3D" type="Node3D" unique_id=2048609377 groups=["INTERACTABLE"]]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=162626958 groups=["INTERACTABLE"]]
+script = ExtResource("1_8bfvj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=699725512 groups=["INTERACTABLE"]]
+mesh = SubResource("BoxMesh_2ttpr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=345879039 groups=["INTERACTABLE"]]
+shape = SubResource("BoxShape3D_8bfvj")
